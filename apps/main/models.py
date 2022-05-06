@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth import get_user_model
 from django.db.models import Sum, Q
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
@@ -8,6 +7,9 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
 class User(AbstractUser):
+    """
+    It's always a better approach to extend the abstract user class and create your own User model
+    """
     @property
     def total_distance_travelled(self):
         return Journey.objects.filter(Q(driver=self) | Q(passengers=self)).distinct().aggregate(
@@ -16,6 +18,9 @@ class User(AbstractUser):
 
 
 class Vehicle(models.Model):
+    """
+    This model will store the vehicle information. For now only minimal fields are added
+    """
     registration_number = models.CharField(max_length=50, unique=True)
     make_year = models.IntegerField()
     datetime_created = models.DateTimeField(auto_now_add=True)
@@ -31,6 +36,10 @@ class Vehicle(models.Model):
 
 
 class Journey(models.Model):
+    """
+    This model will store the journey details of all the journeys taken by every vehicle
+
+    """
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE, related_name='journeys')
     driver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='driver')
     passengers = models.ManyToManyField(User, blank=True)

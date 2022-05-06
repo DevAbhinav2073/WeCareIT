@@ -10,6 +10,10 @@ User = get_user_model()
 
 
 class JourneyCreateCreateView(CreateView):
+    """
+    This view will handle the journey creation. After the journey is created, the user is redirected to the
+    vehicle list page where the information about the vehicles are displayed
+    """
     model = Journey
     fields = [
         'vehicle',
@@ -20,6 +24,9 @@ class JourneyCreateCreateView(CreateView):
 
 
 def vehicle_list_page(request):
+    """
+    This view will display the list of vehicles with the total distance travelled information
+    """
     vehicles = Vehicle.objects.all()
     data = {
         'vehicles': vehicles
@@ -28,6 +35,11 @@ def vehicle_list_page(request):
 
 
 def passenger_list_page(request):
+    """
+        This view will display the list of passengers with the total distance travelled information
+
+    """
+
     passengers = User.objects.all()
     data = {
         'passengers': passengers
@@ -36,4 +48,7 @@ def passenger_list_page(request):
 
 
 def home(request):
+    """
+    This is simply the homepage that contains the link to different 3 pages
+    """
     return TemplateResponse(request, 'main/home.html')
