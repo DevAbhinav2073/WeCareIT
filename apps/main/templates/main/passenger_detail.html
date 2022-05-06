@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Passenger list</title>
+</head>
+<body>
+<table border="1px">
+    <thead>
+    <th>Passenger name</th>
+    <th>Total distance travelled</th>
+    </thead>
+    <tbody>
+    {% for passenger in passengers %}
+    <tr>
+        <td>{{passenger}}</td>
+        <td>{{passenger.total_distance_travelled|floatformat:1}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

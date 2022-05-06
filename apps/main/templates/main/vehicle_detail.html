@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehicle List</title>
+</head>
+<body>
+<table border="1px">
+    <thead>
+    <th>Registration number</th>
+    <th>Make year</th>
+    <th>Total distance travelled</th>
+    </thead>
+    <tbody>
+    {% for vehicle in vehicles %}
+    <tr>
+        <td>{{vehicle.registration_number}}</td>
+        <td>{{vehicle.make_year}}</td>
+        <td>{{vehicle.total_distance_travelled|floatformat:1}}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>
